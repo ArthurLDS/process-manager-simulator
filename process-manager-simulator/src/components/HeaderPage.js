@@ -20,10 +20,9 @@ export default class HeaderPage extends Component {
         return (
             <div>
                 <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <p>
+                    <h1>
                         Process Manager Simulator
-                    </p>
+                    </h1>
                 </header>
             </div>
         )
