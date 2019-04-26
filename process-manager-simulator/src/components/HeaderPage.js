@@ -19,7 +19,7 @@ export default class HeaderPage extends Component {
     render() {
         return (
             <div>
-                <header className="App-header">
+                <header style={{marginBottom: "40px", textAlign: "center"}}>
                     <h1>
                         Process Manager Simulator
                     </h1>
