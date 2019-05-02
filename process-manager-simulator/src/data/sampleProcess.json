@@ -1,802 +1,802 @@
 [
     {
        "name":"Google Chrome",
-       "time":10
+       "time":50
     },
     {
        "name":"Counter Strike",
-       "time":10
+       "time":50
     },
     {
        "name":"Android Studio",
-       "time":10
+       "time":50
     },
     {
        "name":"Visual Studio Code",
-       "time":10
+       "time":50
     },
     {
        "name":"Spotfy",
-       "time":10
+       "time":50
     },
     {
        "name":"Discord",
-       "time":10
+       "time":50
     },
     {
        "name":"WhatsApp",
-       "time":10
+       "time":50
     },
     {
        "name":"Telegran",
-       "time":10
+       "time":50
     },
     {
        "name":"League of Legends",
-       "time":10
+       "time":50
     },
     {
        "name":"Word",
-       "time":10
+       "time":50
     },
     {
        "name":"Excel",
-       "time":10
+       "time":50
     },
     {
        "name":"PowerPoint",
-       "time":10
+       "time":50
     },
     {
        "name":"Git",
-       "time":10
+       "time":50
     },
     {
        "name":"JAVA JRE",
-       "time":10
+       "time":50
     },
     {
        "name":"Firefox",
-       "time":10
+       "time":50
     },
     {
        "name":"NojeJS",
-       "time":10
+       "time":50
     },
     {
        "name":"Stremio",
-       "time":10
+       "time":50
     },
     {
        "name":"Netflix",
-       "time":10
+       "time":50
     },
     {
        "name":"Runtime windows",
-       "time":10
+       "time":50
     },
     {
        "name":"IntellJ",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Skype Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Service",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Skype Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Control",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Application",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Application",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Host",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Host",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Service",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Control",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Control",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Control",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Skype Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Host",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Host",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Skype Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Skype Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Control",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Control",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Skype Application",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Control",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Application",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Google Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Skype Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Xbox Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Service",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Application",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Service",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Application",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Host",
-       "time":10
+       "time":50
     },
     {
        "name":"EpicGames Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Host",
-       "time":10
+       "time":50
     },
     {
        "name":"NVIDIA Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Control",
-       "time":10
+       "time":50
     },
     {
        "name":"Cortana Manager",
-       "time":10
+       "time":50
     },
     {
        "name":"Logitech Host",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Dependence",
-       "time":10
+       "time":50
     },
     {
        "name":"Paint Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"Microsoft Application",
-       "time":10
+       "time":50
     },
     {
        "name":"uTorrent Bash",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Runtime Broker",
-       "time":10
+       "time":50
     },
     {
        "name":"FortClient Application",
-       "time":10
+       "time":50
     },
     {
        "name":"Razer Service",
-       "time":10
+       "time":50
     }
  ]

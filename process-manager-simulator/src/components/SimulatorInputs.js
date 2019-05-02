@@ -44,13 +44,41 @@ export default class SimulatorInputs extends Component {
     async runProcesses() {
         let processService = new ProcessService()
         let processesSelecteds = (processService.selectRandon(this.state.numberProcess))
+        console.log(processesSelecteds)
         await this.setState({ isSimulationRunning: true, isSimulationDone: false }, this.startTimer())
         await this.operateProcesses(processesSelecteds, processType.CREATED);
-        await this.operateProcesses(processesSelecteds, processType.ABLE);
-        await this.operateProcesses(processesSelecteds, processType.RUNNING);
+
+        //await this.operateProcesses(processesSelecteds, processType.ABLE);
+        //await this.operateProcesses(processesSelecteds, processType.RUNNING);
+
+        await this.executeProcess(processesSelecteds)
+
         await this.operateProcesses(processesSelecteds, processType.BLOCKED);
         await this.operateProcesses(processesSelecteds, processType.DESTROYED);
         await this.setState({ isSimulationRunning: false, isSimulationDone: true, totalTimeExecution: 0 })
+    }
+
+
+    async executeProcess(processesAbles) {
+        console.log("ABLES", processesAbles[0].cicles)
+        await this.setState({ processesAble: processesAbles })
+        while (processesAbles.some(p => p.cicles > 0)) {
+            await this.asyncForEach(processesAbles, async (p) => {
+                if (p.cicles > 0) {
+                    await this.setState({ processesExecution: [p] }) //TODO: Remove the process from processesAble too
+                    for (let i = 0; i < 30; i++) {
+                        await this.sleep(this.state.timeCicle);
+                        console.log("DECREMENTOU OS CICLOS")
+                        if (p.cicles <= 0) {
+                            console.log("Zerou", p)
+                            break
+                        }
+                        p.cicles = p.cicles - 1
+                    }
+                }
+            })
+        }
+        console.log("AFTER ABLES", processesAbles)
     }
 
     async operateProcesses(processesSelecteds, type) {
@@ -106,11 +134,14 @@ export default class SimulatorInputs extends Component {
     }
 
 
-    startTimer(){
+    startTimer() {
         let secondsCounter = 0
         setInterval(() => {
+            if (this.state.isSimulationRunning)
+                clearTimeout()
             this.setState({
-                totalTimeExecution: secondsCounter})
+                totalTimeExecution: secondsCounter
+            })
             secondsCounter++
         }, 1000)
     }
