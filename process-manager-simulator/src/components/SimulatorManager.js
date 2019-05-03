@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Card, Container, Form, ListGroup } from 'react-bootstrap';
+import { Button, Card, Container, Form, ListGroup, Badge } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import If from '../components/If';
-import CardProcess from '../components/CardProcess';
+import If from './If';
+import CardProcess from './CardProcess';
+import DeviceCardList from './DeviceCardList';
 import ProcessService from '../service/processService'
 
 const processType = {
@@ -14,7 +15,7 @@ const processType = {
     DESTROYED: "DESTROYED",
 };
 
-export default class SimulatorInputs extends Component {
+export default class SimulatorManager extends Component {
 
     constructor(props) {
         super(props);
@@ -23,6 +24,8 @@ export default class SimulatorInputs extends Component {
             processesAble: [],
             processesExecution: [],
             processesBlocked: [],
+            processesBlocked2: [],
+            processesBlocked3: [],
             processesDestroyed: [],
             numberProcess: 0,
             timeCicle: 0,
@@ -45,11 +48,10 @@ export default class SimulatorInputs extends Component {
         let processService = new ProcessService()
         let processesSelecteds = (processService.selectRandon(this.state.numberProcess))
         console.log(processesSelecteds)
-        await this.setState({ isSimulationRunning: true, isSimulationDone: false }, this.startTimer())
-        await this.operateProcesses(processesSelecteds, processType.CREATED);
+        await this.setState({ isSimulationRunning: true, isSimulationDone: false })
 
-        //await this.operateProcesses(processesSelecteds, processType.ABLE);
-        //await this.operateProcesses(processesSelecteds, processType.RUNNING);
+        await this.operateProcesses(processesSelecteds, processType.CREATED);
+        await this.operateProcesses(processesSelecteds, processType.ABLE);
 
         await this.executeProcess(processesSelecteds)
 
@@ -58,27 +60,24 @@ export default class SimulatorInputs extends Component {
         await this.setState({ isSimulationRunning: false, isSimulationDone: true, totalTimeExecution: 0 })
     }
 
-
     async executeProcess(processesAbles) {
-        console.log("ABLES", processesAbles[0].cicles)
-        await this.setState({ processesAble: processesAbles })
         while (processesAbles.some(p => p.cicles > 0)) {
-            await this.asyncForEach(processesAbles, async (p) => {
+            await this.asyncForEach(processesAbles.reverse(), async (p) => {
+                let ables = processesAbles.filter(pa => pa.id != p.id)
                 if (p.cicles > 0) {
-                    await this.setState({ processesExecution: [p] }) //TODO: Remove the process from processesAble too
+                    await this.setState({ processesExecution: [p], processesAble: ables })
+                    await this.sleep(this.state.timeCicle);
                     for (let i = 0; i < 30; i++) {
-                        await this.sleep(this.state.timeCicle);
-                        console.log("DECREMENTOU OS CICLOS")
+                        p.cicles = p.cicles - 1
                         if (p.cicles <= 0) {
-                            console.log("Zerou", p)
+                            processesAbles = ables
+                            this.setState({ processesAble: ables })
                             break
                         }
-                        p.cicles = p.cicles - 1
                     }
                 }
             })
         }
-        console.log("AFTER ABLES", processesAbles)
     }
 
     async operateProcesses(processesSelecteds, type) {
@@ -133,7 +132,6 @@ export default class SimulatorInputs extends Component {
         this.setState({ processesCreated: [], processesAble: [], processesExecution: [], processesBlocked: [], processesDestroyed: [] })
     }
 
-
     startTimer() {
         let secondsCounter = 0
         setInterval(() => {
@@ -172,13 +170,7 @@ export default class SimulatorInputs extends Component {
                                     </Form>
                                 </If>
                                 <If test={this.state.isSimulationRunning && !this.state.isSimulationDone}>
-                                    <Button variant="warning" type="button" className="btn-operator" onClick={this.onClickRun}>
-                                        Pausar simulação
-                                    </Button>
-                                    <Button variant="danger" type="button" className="btn-operator" onClick={this.onClickRun}>
-                                        Parar simulação
-                                    </Button>
-                                    <h2>{this.state.totalTimeExecution}</h2>
+                                    <h6>Running simulation...</h6>
                                 </If>
                                 <If test={this.state.isSimulationDone}>
                                     <Button variant="primary" type="button" className="btn-operator" onClick={this.onClickRunAgain}>
@@ -191,19 +183,26 @@ export default class SimulatorInputs extends Component {
                 </Row>
                 <If test={this.state.isSimulationRunning || this.state.isSimulationDone}>
                     <Row className="default_spacing">
-                        <Col sm={6}>
+                        <Col sm={4}>
                             <CardProcess title="Criação" list={this.state.processesCreated} />
                         </Col>
-                        <Col sm={6}>
+                        <Col sm={4}>
                             <CardProcess title="Apto" list={this.state.processesAble} />
                         </Col>
-                    </Row>
-                    <Row className="default_spacing">
                         <Col sm={4}>
                             <CardProcess title="Execução" list={this.state.processesExecution} />
                         </Col>
-                        <Col sm={4}>
-                            <CardProcess title="Bloqueado" list={this.state.processesBlocked} />
+                    </Row>
+                    <Row className="default_spacing">
+                        <Col sm={8}>
+                            <Card>
+                                <Card.Header>Bloqueado</Card.Header>
+                                <Row className="list-row">
+                                    <DeviceCardList title="Vídeo" list={this.state.processesBlocked}/>
+                                    <DeviceCardList title="Impressora" list={this.state.processesBlocked2}/>
+                                    <DeviceCardList title="HD" list={this.state.processesBlocked3}/>
+                                </Row>
+                            </Card>
                         </Col>
                         <Col sm={4}>
                             <CardProcess title="Destruição" list={this.state.processesDestroyed} />

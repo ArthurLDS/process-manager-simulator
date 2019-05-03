@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HeaderPage from './components/HeaderPage';
-import SimulatorInputs from './components/SimulatorInputs';
+import SimulatorManager from './components/SimulatorManager';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -15,7 +15,7 @@ class App extends Component {
             <Col sm={12}>
               <div className="container">
                 <HeaderPage />
-                <SimulatorInputs/>
+                <SimulatorManager/>
               </div>
             </Col>
           </Row>
