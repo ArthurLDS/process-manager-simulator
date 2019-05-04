@@ -18,6 +18,26 @@ class ProcessService {
         return Math.floor(Math.random() * 200) + 50; //Returns a randon number between 50 and 200
     }
 
+    selectRandonDevice(){
+        let devices = ["Impressora", "Vídeo", "HD"];
+        return devices[Math.floor(Math.random() * devices.length - 1) + 0]
+    }
+
+    needToAcessDevice(){
+        let chance = 100
+        return Math.floor(Math.random() * chance) + 1 === 1
+    }
+
+    ciclesRandonHD(){
+        return Math.floor(Math.random() * 200) + 300;
+    }
+    ciclesRandonVideo(){
+        return Math.floor(Math.random() * 100) + 200;
+    }
+    ciclesRandonPrinter(){
+        return Math.floor(Math.random() * 300) + 400;
+    }
+
 }
 
 export default ProcessService

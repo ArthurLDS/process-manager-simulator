@@ -15,6 +15,12 @@ const processType = {
     DESTROYED: "DESTROYED",
 };
 
+const deviceType = {
+    PRINTER: "Impressora",
+    VIDEO: "Vídeo",
+    HD: "HD",
+};
+
 export default class SimulatorManager extends Component {
 
     constructor(props) {
@@ -24,15 +30,23 @@ export default class SimulatorManager extends Component {
             processesAble: [],
             processesExecution: [],
             processesBlocked: [],
-            processesBlocked2: [],
-            processesBlocked3: [],
             processesDestroyed: [],
             numberProcess: 0,
             timeCicle: 0,
             currentCicle: 0,
             isSimulationRunning: false,
             isSimulationDone: false,
-            totalTimeExecution: 0
+            totalTimeExecution: 0,
+
+            totalProcesses: 0,
+            totalCicles: 0,
+            dateInitial: Date(),
+            dateFinal: Date(),
+            qtdCreated: 0,
+            qtdAble: 0,
+            qtdExecution: 0,
+            qtdBlocked: 0,
+            qtdDestroyed: 0,
         }
     }
 
@@ -48,28 +62,43 @@ export default class SimulatorManager extends Component {
         let processService = new ProcessService()
         let processesSelecteds = (processService.selectRandon(this.state.numberProcess))
         console.log(processesSelecteds)
-        await this.setState({ isSimulationRunning: true, isSimulationDone: false })
+        await this.setState({
+            isSimulationRunning: true, isSimulationDone: false,
+            totalProcesses: processesSelecteds.length
+        })
 
         await this.operateProcesses(processesSelecteds, processType.CREATED);
         await this.operateProcesses(processesSelecteds, processType.ABLE);
 
         await this.executeProcess(processesSelecteds)
 
-        await this.operateProcesses(processesSelecteds, processType.BLOCKED);
+        //await this.operateProcesses(processesSelecteds, processType.BLOCKED);
         await this.operateProcesses(processesSelecteds, processType.DESTROYED);
         await this.setState({ isSimulationRunning: false, isSimulationDone: true, totalTimeExecution: 0 })
     }
 
     async executeProcess(processesAbles) {
-        while (processesAbles.some(p => p.cicles > 0)) {
+        let totalCiclesCPU = 0
+        let processService = new ProcessService()
+        while (processesAbles.some(p => p.cicles > 0 || p.blocked)) {
             await this.asyncForEach(processesAbles.reverse(), async (p) => {
-                let ables = processesAbles.filter(pa => pa.id != p.id)
                 if (p.cicles > 0) {
-                    await this.setState({ processesExecution: [p], processesAble: ables })
+                    if (processService.needToAcessDevice()) {
+                        p.blocked = true
+                        this.runInOutStage(p)
+                        console.log("BLOQUEADO:", p.name)
+                    } else {
+                        await this.setState({ processesExecution: [p] })
+                    }
+                    let ables = processesAbles.filter(pa => pa.id != p.id && !pa.blocked)
+                    await this.setState({ processesAble: ables })
                     await this.sleep(this.state.timeCicle);
+
                     for (let i = 0; i < 30; i++) {
+                        totalCiclesCPU++;
                         p.cicles = p.cicles - 1
                         if (p.cicles <= 0) {
+                            p.dateFinal = new Date()
                             processesAbles = ables
                             this.setState({ processesAble: ables })
                             break
@@ -78,6 +107,20 @@ export default class SimulatorManager extends Component {
                 }
             })
         }
+        await this.setState({ processesExecution: [], totalCicles: totalCiclesCPU, dateFinal: new Date() })
+        return
+    }
+
+    async runInOutStage(process) {
+        let processService = new ProcessService()
+        let deviceName = processService.selectRandonDevice()
+        process["type"] = deviceName
+        let processesBlocked = this.state.processesBlocked;
+        processesBlocked.push(process)
+        await this.setState({ processesBlocked: processesBlocked })
+        await this.sleep(this.state.timeCicle);
+        process.blocked = false
+        processesBlocked.filter(p => p.id != process.id)
     }
 
     async operateProcesses(processesSelecteds, type) {
@@ -85,13 +128,18 @@ export default class SimulatorManager extends Component {
         await this.asyncForEach(processesSelecteds, async (p) => {
             await this.sleep(this.state.timeCicle);
             processesDone.push(p);
+            p.dateInitial = new Date();
             switch (type) {
                 case processType.CREATED:
-                    await this.setState({ processesCreated: processesDone })
+                    let qtdCreated = this.state.qtdCreated
+                    qtdCreated++
+                    await this.setState({ processesCreated: processesDone, qtdCreated: qtdCreated })
                     break;
                 case processType.ABLE:
+                    let qtdAble = this.state.qtdAble
+                    qtdAble++
                     this.state.processesCreated.shift()
-                    await this.setState({ processesAble: processesDone })
+                    await this.setState({ processesAble: processesDone, qtdAble: qtdAble })
                     break;
                 case processType.RUNNING:
                     this.state.processesAble.shift()
@@ -102,7 +150,7 @@ export default class SimulatorManager extends Component {
                     await this.setState({ processesBlocked: processesDone })
                     break;
                 case processType.DESTROYED:
-                    this.state.processesBlocked.shift()
+                    let blockeds = this.state.processesBlocked.shift()
                     await this.setState({ processesDestroyed: processesDone })
                     break;
                 default:
@@ -144,6 +192,35 @@ export default class SimulatorManager extends Component {
         }, 1000)
     }
 
+    getListPrinter() {
+        return this.state.processesBlocked.filter(p => p.type === deviceType.PRINTER)
+    }
+    getListVideo() {
+        return this.state.processesBlocked.filter(p => p.type === deviceType.VIDEO)
+    }
+    getListHD() {
+        return this.state.processesBlocked.filter(p => p.type === deviceType.HD)
+    }
+
+    getTotalTime(dateInitial, dateFinal) {
+        let startDate = new Date(dateInitial)
+        let endDate = new Date(dateFinal)
+        var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+        return this.convertSeconds(seconds)
+
+    }
+
+    convertSeconds(sec) {
+        let hours = Math.floor(sec / 3600);
+        sec %= 3600;
+        let minutes = Math.floor(sec / 60);
+        let seconds = sec % 60;
+        minutes = String(minutes).padStart(2, "0");
+        hours = String(hours).padStart(2, "0");
+        seconds = Math.round(String(seconds).padStart(2, "0"));
+        return `${hours}:${minutes}:${seconds}`
+    }
+
     render() {
         return (
             <div>
@@ -173,6 +250,27 @@ export default class SimulatorManager extends Component {
                                     <h6>Running simulation...</h6>
                                 </If>
                                 <If test={this.state.isSimulationDone}>
+                                    <Row style={{ marginBottom: '15px' }}>
+                                        <Col>
+                                            <div><strong>Numero total de processos:</strong><span>&nbsp;
+                                                {this.state.totalProcesses}</span>
+                                            </div>
+                                            <div><strong>Tempo total:</strong><span>&nbsp;
+                                                {this.getTotalTime(this.state.dateInitial, this.state.dateFinal)}</span>
+                                            </div>
+                                            <div><strong>Número total de ciclos:</strong><span>&nbsp;
+                                                {this.state.totalCicles}</span>
+                                            </div>
+                                            <div><strong>Tempo médio de espera fila de aptos:</strong><span>&nbsp;10</span></div>
+                                        </Col>
+                                        <Col>
+                                            <div><strong>Qtd. processos em criação</strong><span>&nbsp;{this.state.qtdCreated}</span></div>
+                                            <div><strong>Qtd. processos em aptos.</strong><span>&nbsp;{this.state.qtdAble}</span></div>
+                                            <div><strong>Qtd. processos em execução</strong><span>&nbsp;{this.state.qtdAble}</span></div>
+                                            <div><strong>Qtd. processos em bloqueado</strong><span>&nbsp;{this.state.qtdAble - 2}</span></div>
+                                            <div><strong>Qtd. processos em bloqueado</strong><span>&nbsp;{this.state.qtdAble}</span></div>
+                                        </Col>
+                                    </Row>
                                     <Button variant="primary" type="button" className="btn-operator" onClick={this.onClickRunAgain}>
                                         Executar novamente
                                     </Button>
@@ -198,9 +296,9 @@ export default class SimulatorManager extends Component {
                             <Card>
                                 <Card.Header>Bloqueado</Card.Header>
                                 <Row className="list-row">
-                                    <DeviceCardList title="Vídeo" list={this.state.processesBlocked}/>
-                                    <DeviceCardList title="Impressora" list={this.state.processesBlocked2}/>
-                                    <DeviceCardList title="HD" list={this.state.processesBlocked3}/>
+                                    <DeviceCardList title="Vídeo" list={this.getListVideo()} />
+                                    <DeviceCardList title="Impressora" list={this.getListPrinter()} />
+                                    <DeviceCardList title="HD" list={this.getListHD()} />
                                 </Row>
                             </Card>
                         </Col>
