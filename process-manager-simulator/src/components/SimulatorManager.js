@@ -42,6 +42,8 @@ export default class SimulatorManager extends Component {
             totalCicles: 0,
             dateInitial: Date(),
             dateFinal: Date(),
+            dateInitProcessing: Date(),
+            dateEndProcessing: Date(),
             qtdCreated: 0,
             qtdAble: 0,
             qtdExecution: 0,
@@ -80,6 +82,7 @@ export default class SimulatorManager extends Component {
     async executeProcess(processesAbles) {
         let totalCiclesCPU = 0
         let processService = new ProcessService()
+        await this.setState({dateInitProcessing: new Date()})
         while (processesAbles.some(p => p.cicles > 0 || p.blocked)) {
             await this.asyncForEach(processesAbles.reverse(), async (p) => {
                 if (p.cicles > 0) {
@@ -107,7 +110,7 @@ export default class SimulatorManager extends Component {
                 }
             })
         }
-        await this.setState({ processesExecution: [], totalCicles: totalCiclesCPU, dateFinal: new Date() })
+        await this.setState({ processesExecution: [], totalCicles: totalCiclesCPU, dateEndProcessing: new Date(), dateFinal: new Date() })
         return
     }
 
@@ -156,7 +159,6 @@ export default class SimulatorManager extends Component {
                 default:
                     await this.setState({ processesCreated: processesDone })
             }
-
         })
         return;
     }
@@ -207,17 +209,26 @@ export default class SimulatorManager extends Component {
         let endDate = new Date(dateFinal)
         var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
         return this.convertSeconds(seconds)
+    }
 
+    getTotalProcessHD() {
+        return this.state.processesDestroyed.filter(p => p.type === deviceType.HD).length
+    }
+    getTotalProcessVideo() {
+        return this.state.processesDestroyed.filter(p => p.type === deviceType.VIDEO).length
+    }
+    getTotalProcessPrinter() {
+        return this.state.processesDestroyed.filter(p => p.type === deviceType.PRINTER).length
     }
 
     convertSeconds(sec) {
         let hours = Math.floor(sec / 3600);
         sec %= 3600;
         let minutes = Math.floor(sec / 60);
-        let seconds = sec % 60;
+        let seconds = Math.round(sec % 60);
         minutes = String(minutes).padStart(2, "0");
         hours = String(hours).padStart(2, "0");
-        seconds = Math.round(String(seconds).padStart(2, "0"));
+        seconds = String(seconds).padStart(2, "0");
         return `${hours}:${minutes}:${seconds}`
     }
 
@@ -255,20 +266,39 @@ export default class SimulatorManager extends Component {
                                             <div><strong>Numero total de processos:</strong><span>&nbsp;
                                                 {this.state.totalProcesses}</span>
                                             </div>
-                                            <div><strong>Tempo total:</strong><span>&nbsp;
+                                            <div><strong>Tempo total de execução:</strong><span>&nbsp;
                                                 {this.getTotalTime(this.state.dateInitial, this.state.dateFinal)}</span>
                                             </div>
                                             <div><strong>Número total de ciclos:</strong><span>&nbsp;
                                                 {this.state.totalCicles}</span>
                                             </div>
-                                            <div><strong>Tempo médio de espera fila de aptos:</strong><span>&nbsp;10</span></div>
+                                            <div><strong>Tempo médio de espera fila de aptos:</strong>
+                                                <span>&nbsp;
+                                                    {this.getTotalTime(this.state.dateInitProcessing, this.state.dateEndProcessing)}
+                                                </span>
+                                            </div>
                                         </Col>
                                         <Col>
-                                            <div><strong>Qtd. processos em criação</strong><span>&nbsp;{this.state.qtdCreated}</span></div>
-                                            <div><strong>Qtd. processos em aptos.</strong><span>&nbsp;{this.state.qtdAble}</span></div>
-                                            <div><strong>Qtd. processos em execução</strong><span>&nbsp;{this.state.qtdAble}</span></div>
-                                            <div><strong>Qtd. processos em bloqueado</strong><span>&nbsp;{this.state.qtdAble - 2}</span></div>
-                                            <div><strong>Qtd. processos em bloqueado</strong><span>&nbsp;{this.state.qtdAble}</span></div>
+                                            <div><strong>Qtd. processos em criação:</strong><span>&nbsp;{this.state.totalProcesses}</span></div>
+                                            <div><strong>Qtd. processos em aptos.:</strong><span>&nbsp;{this.state.totalProcesses}</span></div>
+                                            <div><strong>Qtd. processos em execução:</strong><span>&nbsp;{this.state.totalProcesses}</span></div>
+                                            <div className="margin-top">
+                                                <strong>Qtd. processos em bloqueados:</strong>
+                                            </div>
+                                            <div>
+                                                <span className="margin-right">
+                                                    <strong>HD:</strong>
+                                                    <span>&nbsp;{this.getTotalProcessHD()}</span>
+                                                </span>
+                                                <span className="margin-right">
+                                                    <strong>Vídeo:</strong>
+                                                    <span>&nbsp;{this.getTotalProcessVideo()}</span>
+                                                </span>
+                                                <span className="margin-right">
+                                                    <strong>Impressora:</strong>
+                                                    <span>&nbsp;{this.getTotalProcessPrinter()}</span>
+                                                </span>
+                                            </div>
                                         </Col>
                                     </Row>
                                     <Button variant="primary" type="button" className="btn-operator" onClick={this.onClickRunAgain}>

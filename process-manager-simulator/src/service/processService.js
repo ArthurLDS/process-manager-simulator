@@ -20,7 +20,7 @@ class ProcessService {
 
     selectRandonDevice(){
         let devices = ["Impressora", "Vídeo", "HD"];
-        return devices[Math.floor(Math.random() * devices.length - 1) + 0]
+        return devices[Math.floor(Math.random() * devices.length) + 0]
     }
 
     needToAcessDevice(){
